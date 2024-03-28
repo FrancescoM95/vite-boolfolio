@@ -1,17 +1,17 @@
 <script>
 import AppHeader from './components/AppHeader.vue';
 import axios from 'axios';
+import ProjectsList from './components/ProjectsList.vue';
 const endpoint = 'http://localhost:8000/api/projects/';
 
 export default{
   name: 'Boolfolio',
-  components: {AppHeader},
+  components: {AppHeader, ProjectsList},
   data: () => ({projects: []}),
   methods:{
     fetchProject(){
       axios.get(endpoint).then(res => {
-        console.log(res.data);
-       
+        this.projects= res.data;
       })
     }
   },
@@ -23,12 +23,11 @@ export default{
 
 <template>
 <AppHeader />
-<h1>Boolfolio</h1>
-<ul>
-  <li v-for="project in projects" :key="project.id">
-    <h4 v-text="project.title"></h4>
-  </li>
-</ul>
+<div class="container">
+  <h1>Boolfolio</h1>
+  <ProjectsList :projects="projects"/>
+</div>
+
 </template>
 
 <style>
