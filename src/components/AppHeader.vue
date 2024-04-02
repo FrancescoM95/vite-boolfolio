@@ -14,7 +14,7 @@ export default{
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <RouterLink class="nav-link active" aria-current="page" :to ="'/'">Home</RouterLink>
         </li>
       </ul>
     </div>
