@@ -6,11 +6,17 @@ const endpoint = 'http://localhost:8000/api/projects/';
 export default{
   name: 'HomePage',
   components: { ProjectsList},
-  data: () => ({projects: []}),
+  data: () => ({projects: [], isLoading: false}),
   methods:{
     fetchProject(){
-      axios.get(endpoint).then(res => {
+      this.isLoading = true;
+      axios.get(endpoint)
+      .then(res => {
         this.projects= res.data;
+      }).catch(err =>{
+        console.error(err.message);
+      }).then(() => {
+        this.isLoading = false;
       })
     }
   },
@@ -23,7 +29,8 @@ export default{
 <template>
 <div class="container py-4">
   <h1 class="mb-3">Boolfolio</h1>
-  <ProjectsList :projects="projects"/>
+  <AppLoader v-if="isLoading"/>
+  <ProjectsList v-else :projects="projects"/>
 </div>
 
 </template>

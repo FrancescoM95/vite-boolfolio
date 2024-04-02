@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import ProjectCard from '../components/ProjectCard.vue';
+import AppLoader from '../components/AppLoader.vue';
 const endpoint = 'http://localhost:8000/api/projects/';
 
 export default{
@@ -28,7 +29,7 @@ export default{
 
 <template>
     <div class="container py-4">
-        <div v-if="isLoading && !project">Caricamento...</div>
+        <AppLoader v-if="isLoading && !project"/>
         <ProjectCard v-if="!isLoading && project" :project="project" :isDetail="true"/>
     </div>
     
